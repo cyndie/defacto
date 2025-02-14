@@ -1,0 +1,4 @@
+numpy==2.2.2
+pandas==2.2.3
+faiss-cpu==1.10.0
+transformers==4.48.2

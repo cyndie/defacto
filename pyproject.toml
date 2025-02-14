@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "defacto"
+version = "0.1.0"
+description = ""
+authors = []
+readme = "README.md"
+packages = [{ include = "backend" }, { include = "frontend" }]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+gradio = "^5.15.0"
+kokoro = "0.7.3"
+soundfile = "0.13.1"
+bs4 = "^0.0.2"
+pdf2image = "^1.17.0"
+openai = "^1.63.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

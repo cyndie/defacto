@@ -1,0 +1,69 @@
+services:  
+  llm-qwen25-14b:
+    container_name: llm-qwen25-14b
+    image: vllm/vllm-openai:v0.7.0
+    ports: 
+      - "7040:8000"
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ['0']
+              capabilities: [gpu]
+    ipc: host
+    volumes:
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    command: >
+      --model Qwen/Qwen2.5-14B-Instruct-1M
+      --enable-prefix-caching
+      --enable-chunked-prefill
+      --disable-log-requests
+      --max-model-len 65536
+      --gpu_memory_utilization 0.92
+
+  ocr-got:
+    container_name: ocr-got
+    image: got:v0.1.0
+    ports: 
+      - "7041:8001"
+    runtime: nvidia
+    volumes:
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ['1']
+              capabilities: [gpu]
+    ipc: host
+
+  # not in MVP
+  # colpali:
+  #   container_name: colpali
+  #   image: got:v0.1.0
+  #   ports: 
+  #     - "7043:8001"
+  #   runtime: nvidia
+  #   volumes:
+  #     - ~/.cache/huggingface:/root/.cache/huggingface
+  #   deploy:
+  #     resources:
+  #       reservations:
+  #         devices:
+  #           - driver: nvidia
+  #             device_ids: ['1']
+  #             capabilities: [gpu]
+  #   ipc: host
+
+  api-qa:
+    container_name: qa
+    image: qa:v0.1.0
+    ports: 
+      - "7042:8000"
+    environment:
+      LLM_URL: "http://llm-qwen25-14b:8000/v1"
+      LLM_NAME: "Qwen/Qwen2.5-14B-Instruct-1M"
+    
