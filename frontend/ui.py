@@ -145,7 +145,7 @@ def upload_and_processing(file):
 
 ################ UI ################
 with gr.Blocks(title="Assistant dossier pénal", css=css, theme=defacto_theme) as demo:
-    gr.HTML("<img id='defacto-logo' src='/gradio_api/file=defacto_logo.png'/>")
+    gr.HTML("<header><img id='defacto-logo' src='/gradio_api/file=defacto_logo.png'/><aside><h2>De Facto</h2><p>Mon assistant juridique</p></aside></header>")
 
     # IMPORTER
     with gr.Group(elem_id="import_block") as import_file:
