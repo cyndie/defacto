@@ -237,4 +237,4 @@ with gr.Blocks(title="Assistant dossier pénal", css=css, theme=defacto_theme) a
 
 
 if __name__ == "__main__":
-    demo.launch(favicon_path="favicon.svg", allowed_paths=["."])
+    demo.launch(favicon_path="favicon.png", allowed_paths=["."])
